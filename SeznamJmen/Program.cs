@@ -27,7 +27,7 @@ while (!ukonceni)
             // Přidání jména
             Console.Clear();
             Console.WriteLine("PŘIDÁNÍ JMÉNA\n======================");
-            Console.WriteLine("Jaké jméno chceš přidat?");
+            Console.Write("Jaké jméno chceš přidat?\n\n");
             string jmenoNaPridani = Console.ReadLine();
             seznamJmen.Add(jmenoNaPridani);
             Console.Clear();
@@ -40,7 +40,7 @@ while (!ukonceni)
             // Odebrání jména
             Console.Clear();
             Console.WriteLine("ODEBRÁNÍ JMÉNA\n======================");
-            Console.WriteLine("Jaké jméno chceš odebrat?");
+            Console.WriteLine("Jaké jméno chceš odebrat?\n");
             string jmenoNaOdebrani = Console.ReadLine();
             if (!seznamJmen.Contains(jmenoNaOdebrani, StringComparer.OrdinalIgnoreCase))
             {
