@@ -1,4 +1,9 @@
-﻿// Vytvoření listu
+﻿/* Program Seznam jmen
+ * Tvůrce: Patrik Verbovský
+ * Verze 1.0.2
+ * ©️ Patrik Verbovský 2024
+ */
+// Vytvoření listu
 List<string> seznamJmen = new List<string>();
 bool ukonceni = false;
 while (!ukonceni)
@@ -11,13 +16,16 @@ while (!ukonceni)
     Console.WriteLine("3 - Zobrazit seznam");
     Console.WriteLine("4 - Najít jméno");
     Console.WriteLine("5 - Smaž seznam");
+    Console.WriteLine("----------------------");
+    Console.WriteLine("6 - Uložit seznam");
+    Console.WriteLine("7 - Načíst seznam");
     Console.WriteLine("======================");
     Console.WriteLine("0 - Ukončit program");
     Console.Write("======================\nTvoje volba: ");
     int vyber;
 
     // Neplatná volba
-    while (!int.TryParse(Console.ReadLine(), out vyber) || vyber < 0 || vyber > 5)
+    while (!int.TryParse(Console.ReadLine(), out vyber) || vyber < 0 || vyber > 7)
     {
         Console.WriteLine("Neplatná volba. Zadej znovu.");
     }
@@ -112,6 +120,41 @@ while (!ukonceni)
             }
             break;
 
+        case 6:
+            if (!Directory.Exists(@"C:\SeznamJmen\"))
+            {
+                Directory.CreateDirectory(@"C:\SeznamJmen\");
+            }
+            using (StreamWriter sw = new StreamWriter(@"C:\SeznamJmen\SeznamJmen.txt"))
+            {
+                Console.Clear();
+                Console.WriteLine("ULOŽENÍ SEZNAMU\n======================");
+                foreach (string jmeno in seznamJmen)
+                {
+                    sw.WriteLine(jmeno);
+                }
+                Console.WriteLine("Seznam jmen byl úspěšně uložen.");
+                Thread.Sleep(500);
+                Console.Clear();
+            }
+            break;
+
+        case 7:
+            Console.Clear();
+            Console.WriteLine("NAČÍTÁNÍ SEZNAMU\n======================");
+            seznamJmen.Clear(); // Vyčištění seznamu před načtením nových dat
+            using (StreamReader sr = new StreamReader(@"C:\SeznamJmen\SeznamJmen.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    seznamJmen.Add(line);
+                }
+            }
+            Console.WriteLine("Seznam jmen byl úspěšně načten.");
+            Thread.Sleep(500);
+            Console.Clear();
+            break;
         case 0:
             ukonceni = true;
             break;
